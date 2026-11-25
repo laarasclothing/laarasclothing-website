@@ -1,0 +1,105 @@
+:root{
+  --plum:#5B2245; --plum-dark:#3E1630; --rose:#D98BA0; --rose-soft:#F6E3E8;
+  --gold:#C9A24A; --cream:#FBF6F1; --ink:#2B1A24; --muted:#6E5A66; --line:#EADCE2;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter','Noto Sans Devanagari',system-ui,sans-serif;
+  --script:'Great Vibes',cursive;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.6;font-size:16px}
+a{color:var(--plum)}
+img{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* header */
+header.top{position:sticky;top:0;z-index:10;background:rgba(251,246,241,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:10px;padding-bottom:10px}
+.brand{text-decoration:none;color:var(--plum);display:flex;flex-direction:column;line-height:1}
+.brand .name{font-family:var(--serif);font-style:italic;font-weight:600;font-size:28px}
+.brand .sub{font-size:9px;letter-spacing:.32em;font-weight:600;margin-top:2px}
+.brand .by{font-family:var(--script);color:var(--gold);font-size:18px;margin-left:6px}
+.brand-row{display:flex;align-items:baseline}
+nav.links{display:flex;gap:18px;font-size:14px}
+nav.links a{text-decoration:none;color:var(--ink)}
+nav.links a:hover{color:var(--plum)}
+.lang{border:1px solid var(--plum);background:none;color:var(--plum);border-radius:20px;padding:5px 12px;font:600 13px var(--sans);cursor:pointer}
+@media(max-width:760px){nav.links{display:none}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:30px;font-weight:600;text-decoration:none;font-size:15px;border:0;cursor:pointer}
+.btn-wa{background:#1FA855;color:#fff}
+.btn-plum{background:var(--plum);color:#fff}
+.btn-ghost{border:1.5px solid var(--plum);color:var(--plum);background:transparent}
+.btn svg{width:18px;height:18px}
+
+/* hero */
+.hero{background:linear-gradient(160deg,var(--plum) 0%,var(--plum-dark) 100%);color:#fff;padding:56px 0 64px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-120px;top:-80px;width:380px;height:380px;border-radius:50%;border:2px dashed rgba(201,162,74,.35)}
+.hero .eyebrow{color:var(--gold);letter-spacing:.2em;font-size:12px;font-weight:600;text-transform:uppercase}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,56px);line-height:1.1;margin:12px 0 16px}
+.hero h1 em{color:var(--rose)}
+.hero p.lead{font-size:18px;max-width:560px;opacity:.92}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero .btn-ghost{border-color:#fff;color:#fff}
+.offer{margin-top:30px;display:inline-block;background:rgba(255,255,255,.08);border:1px solid rgba(201,162,74,.6);border-radius:14px;padding:14px 18px;font-size:15px}
+.offer b{color:var(--gold)}
+
+/* sections */
+section{padding:60px 0}
+section.alt{background:#fff}
+h2{font-family:var(--serif);font-size:clamp(28px,4.5vw,40px);color:var(--plum);margin:0 0 8px;font-weight:600}
+.sec-lead{color:var(--muted);margin:0 0 30px;max-width:640px}
+.grid{display:grid;gap:18px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}
+section.alt .card{background:var(--cream)}
+.step-n{width:36px;height:36px;border-radius:50%;background:var(--rose-soft);color:var(--plum);display:grid;place-items:center;font-weight:700;margin-bottom:10px}
+.card h3{margin:0 0 6px;font-size:18px;color:var(--plum-dark)}
+.card p{margin:0;color:var(--muted);font-size:15px}
+
+/* prices */
+table.prices{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.prices td{padding:14px 18px;border-bottom:1px solid var(--line)}
+.prices tr:last-child td{border-bottom:0}
+.prices td:last-child{text-align:right;font-weight:700;color:var(--plum);white-space:nowrap}
+.note{font-size:13px;color:var(--muted);margin-top:12px}
+
+/* join */
+.join .card{display:flex;flex-direction:column;gap:12px}
+.join .card .btn{align-self:flex-start;margin-top:auto}
+
+/* studio */
+.studio{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
+@media(max-width:760px){.studio{grid-template-columns:1fr}}
+.seal{aspect-ratio:1;max-width:260px;margin:auto;border-radius:50%;background:var(--plum);display:grid;place-items:center;color:#fff;text-align:center;border:6px solid var(--gold);box-shadow:0 0 0 6px var(--plum)}
+.seal .name{font-family:var(--serif);font-style:italic;font-size:44px;line-height:1}
+.seal .city{letter-spacing:.3em;font-size:12px;color:var(--gold);margin-top:8px}
+
+/* footer */
+footer{background:var(--plum-dark);color:#E9D9E2;padding:40px 0 28px;font-size:14px}
+footer a{color:#fff;text-decoration:none}
+footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+footer h4{color:var(--gold);margin:0 0 10px;font-size:13px;letter-spacing:.15em;text-transform:uppercase}
+footer ul{list-style:none;padding:0;margin:0}
+footer li{margin:6px 0}
+footer .legal{border-top:1px solid rgba(255,255,255,.15);margin-top:28px;padding-top:16px;font-size:12px;opacity:.8}
+
+/* floating whatsapp */
+.wa-float{position:fixed;right:16px;bottom:16px;width:56px;height:56px;border-radius:50%;background:#1FA855;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:20}
+.wa-float svg{width:30px;height:30px;fill:#fff}
+
+/* policy pages */
+.policy{padding:40px 0 60px}
+.policy .wrap{max-width:780px}
+.policy h1{font-family:var(--serif);color:var(--plum);font-size:40px;margin:0 0 4px}
+.policy .updated{color:var(--muted);font-size:14px;margin-bottom:28px}
+.policy h2{font-size:24px;margin-top:30px}
+.policy li{margin:6px 0}
+.policy .box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+
+/* language */
+[data-l="hi"]{display:none}
+body.hi [data-l="en"]{display:none}
+body.hi [data-l="hi"]{display:revert}
+body.hi .eyebrow,body.hi .seal .city{letter-spacing:0}

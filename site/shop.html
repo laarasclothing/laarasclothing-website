@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Styles &amp; Prices — Laara's Studio, Bhiwani</title>
+<meta name="description" content="Choose your stitching styles and place your order with Laara's Studio, Bhiwani. Free pickup on orders of ₹500+, pay on delivery.">
+<meta name="theme-color" content="#5B2245">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Great+Vibes&family=Inter:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.shop-head{background:var(--plum);color:#fff;padding:34px 0 26px}
+.shop-head h1{font-family:var(--serif);font-size:clamp(30px,5vw,44px);margin:0 0 6px;font-weight:600}
+.shop-head p{margin:0;opacity:.9}
+.tabs{position:sticky;top:61px;z-index:5;background:var(--cream);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;padding:10px 20px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{display:inline-block;padding:8px 14px;margin-right:6px;border-radius:20px;border:1px solid var(--line);background:#fff;text-decoration:none;color:var(--ink);font-size:14px}
+.tabs a.on{background:var(--plum);color:#fff;border-color:var(--plum)}
+.cat{padding:28px 0 6px;scroll-margin-top:120px}
+.cat h2{font-size:28px;margin-bottom:4px}
+.cat .hint{color:var(--muted);font-size:14px;margin:0 0 14px}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:10px}
+.item{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;transition:border-color .15s}
+.item.on{border-color:var(--plum);background:#FDF8FA}
+.item label.row{display:flex;align-items:center;gap:12px;cursor:pointer;min-height:32px}
+.item input[type=checkbox]{width:22px;height:22px;accent-color:var(--plum);flex:none}
+.item .nm{flex:1;font-weight:600;font-size:15px}
+.item .pr{font-weight:700;color:var(--plum);white-space:nowrap}
+.item .pr.q{color:var(--muted);font-weight:600;font-size:14px}
+.opts{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);gap:8px;grid-template-columns:1fr 1fr}
+.item.on .opts{display:grid}
+.opts label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+.opts select,.opts input{font:15px var(--sans);padding:8px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);width:100%}
+.opts .full{grid-column:1/-1}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:34px;height:34px;border-radius:50%;border:1px solid var(--plum);background:#fff;color:var(--plum);font-size:18px;cursor:pointer}
+.qty span{min-width:22px;text-align:center;font-weight:700}
+.incl{font-size:13px;color:var(--muted);margin:8px 0 0}
+/* cart bar */
+.cartbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--plum-dark);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 -4px 16px rgba(0,0,0,.2);transform:translateY(110%);transition:transform .25s}
+.cartbar.show{transform:none}
+.cartbar .sum{flex:1;line-height:1.3}
+.cartbar .sum b{font-size:18px}
+.cartbar .btn{background:var(--gold);color:var(--plum-dark)}
+/* drawer */
+.drawer{position:fixed;inset:0;z-index:40;background:rgba(30,10,22,.5);display:none}
+.drawer.open{display:block}
+.panel{position:absolute;right:0;top:0;bottom:0;width:min(100%,460px);background:var(--cream);overflow-y:auto;padding:20px 18px 120px}
+.panel h2{font-size:30px}
+.close{float:right;border:0;background:none;font-size:28px;cursor:pointer;color:var(--plum)}
+.line{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;display:flex;gap:10px}
+.line .d{flex:1;font-size:14px}
+.line .d b{font-size:15px}
+.line .d small{display:block;color:var(--muted)}
+.line .amt{font-weight:700;color:var(--plum);white-space:nowrap}
+.line .rm{border:0;background:none;color:#B03A48;font-size:13px;cursor:pointer;padding:0;margin-top:4px}
+.box2{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+.box2 h3{margin:0 0 8px;font-size:16px;color:var(--plum-dark)}
+.radio{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:15px;cursor:pointer}
+.radio input{width:20px;height:20px;accent-color:var(--plum)}
+.tot td{padding:5px 0;font-size:15px}.tot td:last-child{text-align:right;white-space:nowrap}
+.tot tr.g td{font-size:18px;font-weight:700;color:var(--plum);border-top:1px solid var(--line);padding-top:10px}
+.tot tr.off td{color:#1B8A4A}
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;font-size:13px;color:var(--muted)}
+.field input,.field textarea,.field select{font:16px var(--sans);padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.err{color:#B03A48;font-size:14px;min-height:20px}
+.empty{color:var(--muted);text-align:center;padding:30px 0}
+body.hi .shop-head p{letter-spacing:0}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="/" aria-label="Laara's Clothing by aRu home">
+    <span class="brand-row"><span class="name">Laara's</span><span class="by">by aRu</span></span>
+    <span class="sub">CLOTHING</span>
+  </a>
+  <nav class="links">
+    <a href="/"><span data-l="en">Home</span><span data-l="hi">होम</span></a>
+    <a href="shop.html"><span data-l="en">Styles &amp; prices</span><span data-l="hi">स्टाइल और कीमतें</span></a>
+    <a href="contact.html"><span data-l="en">Contact</span><span data-l="hi">संपर्क</span></a>
+  </nav>
+  <button class="lang" id="langBtn" type="button">हिंदी</button>
+</div></header>
+
+<div class="shop-head"><div class="wrap">
+  <h1><span data-l="en">Choose your styles</span><span data-l="hi">अपनी स्टाइल चुनें</span></h1>
+  <p><span data-l="en">Tick what you want stitched, pick neck, sleeve and back designs, then place your order. We confirm the final price on WhatsApp before cutting. Pay on delivery.</span><span data-l="hi">जो सिलवाना है उस पर टिक करें, गला, बाजू और पीछे का डिज़ाइन चुनें, फिर ऑर्डर करें। कटिंग से पहले WhatsApp पर अंतिम कीमत पक्की करेंगे। भुगतान डिलीवरी पर।</span></p>
+</div></div>
+
+<nav class="tabs" id="tabs"></nav>
+<main class="wrap" id="cats" style="padding-bottom:110px"></main>
+
+<div class="cartbar" id="cartbar">
+  <div class="sum"><span id="cbCount">0 items</span><br><b id="cbTotal">₹0</b></div>
+  <button class="btn" id="openCart" type="button"><span data-l="en">View cart</span><span data-l="hi">कार्ट देखें</span></button>
+</div>
+
+<div class="drawer" id="drawer"><div class="panel" role="dialog" aria-label="Your cart">
+  <button class="close" id="closeCart" aria-label="Close">×</button>
+  <div id="thanks" hidden>
+    <h2><span data-l="en">Thank you!</span><span data-l="hi">धन्यवाद!</span></h2>
+    <div class="box2">
+      <p style="margin:0 0 6px"><span data-l="en">Your order reference</span><span data-l="hi">आपका ऑर्डर नंबर</span></p>
+      <p style="font-size:28px;font-weight:700;color:var(--plum);margin:0" id="tyRef"></p>
+      <p class="incl" id="tyTotal"></p>
+    </div>
+    <p><span data-l="en">We've received your order. Please press <b>Send</b> in WhatsApp so we can confirm the price and your pickup time. If WhatsApp didn't open, tap below.</span><span data-l="hi">हमें आपका ऑर्डर मिल गया है। कृपया WhatsApp में <b>भेजें</b> दबाएँ ताकि हम कीमत और पिकअप का समय पक्का कर सकें। अगर WhatsApp नहीं खुला तो नीचे टैप करें।</span></p>
+    <a class="btn btn-wa" id="tyWa" href="#" style="width:100%;justify-content:center"><span data-l="en">Send order on WhatsApp</span><span data-l="hi">WhatsApp पर ऑर्डर भेजें</span></a>
+    <p class="incl"><span data-l="en">Questions? Call or WhatsApp +91 62800 80140.</span><span data-l="hi">कोई सवाल? +91 62800 80140 पर कॉल या WhatsApp करें।</span></p>
+    <button class="btn btn-ghost" id="tyNew" type="button" style="margin-top:8px"><span data-l="en">Place another order</span><span data-l="hi">एक और ऑर्डर करें</span></button>
+  </div>
+  <div id="cartView">
+  <h2><span data-l="en">Your cart</span><span data-l="hi">आपका कार्ट</span></h2>
+  <div id="lines"></div>
+
+  <div class="box2">
+    <h3><span data-l="en">Delivery</span><span data-l="hi">डिलीवरी</span></h3>
+    <label class="radio"><input type="radio" name="dl" value="trial" checked> <span><span data-l="en">Delivery with trial at your door</span><span data-l="hi">डिलीवरी + घर पर ट्रायल</span> — ₹49</span></label>
+    <label class="radio"><input type="radio" name="dl" value="plain"> <span><span data-l="en">Delivery only</span><span data-l="hi">सिर्फ़ डिलीवरी</span> — ₹39</span></label>
+    <label class="radio"><input type="checkbox" id="measure"> <span><span data-l="en">Measurement visit at home</span><span data-l="hi">घर पर नाप लेने आएँ</span> — ₹50</span></label>
+    <label class="radio"><input type="checkbox" id="express"> <span><span data-l="en">Express stitching</span><span data-l="hi">एक्सप्रेस सिलाई</span> — +20% (min ₹49)</span></label>
+  </div>
+
+  <div class="box2">
+    <h3><span data-l="en">Bill estimate</span><span data-l="hi">बिल का अनुमान</span></h3>
+    <table class="tot" style="width:100%" id="tot"></table>
+    <p class="incl" id="quoteNote"></p>
+  </div>
+
+  <div class="box2">
+    <h3><span data-l="en">Pickup details</span><span data-l="hi">पिकअप की जानकारी</span></h3>
+    <label class="field"><span data-l="en">Your name</span><span data-l="hi">आपका नाम</span><input id="cName" autocomplete="name"></label>
+    <label class="field"><span data-l="en">Mobile number</span><span data-l="hi">मोबाइल नंबर</span><input id="cPhone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13"></label>
+    <label class="field"><span data-l="en">Pickup address in Bhiwani</span><span data-l="hi">भिवानी में पिकअप का पता</span><textarea id="cAddr" rows="2" autocomplete="street-address"></textarea></label>
+    <label class="field"><span data-l="en">Pickup time</span><span data-l="hi">पिकअप का समय</span>
+      <select id="cSlot"><option>8 am – 10 am</option><option>10 am – 12 pm</option><option>12 pm – 2 pm</option><option>2 pm – 4 pm</option><option>4 pm – 6 pm</option></select></label>
+    <label class="field"><span data-l="en">Need it by (optional)</span><span data-l="hi">कब तक चाहिए (वैकल्पिक)</span><input id="cDate" type="date"></label>
+    <label class="field"><span data-l="en">Notes for the tailor (optional)</span><span data-l="hi">दर्ज़ी के लिए नोट (वैकल्पिक)</span><textarea id="cNote" rows="2"></textarea></label>
+  </div>
+  <div class="err" id="err"></div>
+  <button class="btn btn-wa" id="placeBtn" type="button" style="width:100%;justify-content:center;font-size:16px">
+    <span data-l="en">Place order on WhatsApp</span><span data-l="hi">WhatsApp पर ऑर्डर भेजें</span>
+  </button>
+  <p class="incl"><span data-l="en">This opens WhatsApp with your order filled in — just press send. Prices are estimates; we confirm before cutting. No advance for regular stitching.</span><span data-l="hi">WhatsApp पर आपका ऑर्डर लिखा हुआ खुलेगा — बस भेजें दबाएँ। कीमतें अनुमानित हैं; कटिंग से पहले पक्की करेंगे। सामान्य सिलाई पर कोई एडवांस नहीं।</span></p>
+  </div>
+</div></div>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div><h4>Contact</h4><ul>
+      <li><a href="https://wa.me/916280080140">WhatsApp +91 62800 80140</a></li>
+      <li><a href="mailto:admin@laarasclothing.in">admin@laarasclothing.in</a></li>
+      <li>Laara's Studio, 33, MC Colony, Bhiwani, Haryana</li>
+    </ul></div>
+    <div><h4>Policies</h4><ul>
+      <li><a href="terms.html">Terms &amp; Conditions</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="refund.html">Refund &amp; Cancellation</a></li>
+      <li><a href="shipping.html">Pickup &amp; Delivery Policy</a></li>
+    </ul></div>
+  </div>
+  <div class="legal">© 2026 Laara's Clothing by aRu. All rights reserved.</div>
+</div></footer>
+
+<script>
+{
+const WA='916280080140';
+// Google Apps Script web app URL (orders → Google Sheet + email to admin). Leave '' to skip.
+const ORDER_ENDPOINT='';
+const NECK=[['Round neck',0],['V neck',0],['U neck',0],['Square neck',0],['Boat neck',0],['Split neck',0],['Notch neck',20],['Keyhole neck',30],['Sweetheart neck',30],['Angled neck',30],['Zigzag neck',30],['Step neck',40],['Scallop neck',40],['Piping neck',40],['Placket neck',40],['Cutout neck',40],['High neck',40],['Halter neck',40],['Mandarin collar',50],['Overlap neck',50],['Potli button neck',50],['Dori & tassel neck',50],['Contrast patch neck',50],['Strappy neck',50],['Shirt collar',60],['Peter Pan collar',60],['Pintuck neck',60],['Layered neck',60],['Yoke neck',60],['Cowl neck',60]];
+const SLEEVE=[['Sleeveless',0],['Cap sleeve',0],['Elbow sleeve',0],['Three-quarter',0],['Full sleeve',0],['Slit sleeve',30],['Tulip sleeve',40],['Button sleeve',40],['Scalloped sleeve',40],['Cuff sleeve',40],['Cutout sleeve',50],['Tie-up sleeve',50],['Puff sleeve',60],['Bell sleeve',60],['Bishop sleeve',60],['Frill sleeve',60],['Bow sleeve',60],['Pintuck sleeve',60],['Lantern sleeve',80],['Cape sleeve',80]];
+const BACK=[['Round back',0],['Deep U back',0],['Square back',0],['V back',0],['Boat back',0],['Keyhole back',30],['Triangle cut',40],['Button back',50],['Tie-up with latkans',50],['Bow back',60],['Heart back',60],['Double strap',60],['Collar back',60],['Loop back',60],['V-strap back',60],['Strap ladder',80],['X-cross back',80],['Frill back',80],['Net panel back',100],['Corset lace-up',120]];
+// opts: n = neck, s = sleeve, b = back
+const CATS=[
+ {id:'kurti',en:'Kurti styles',hi:'कुर्ती',o:'ns',items:[['Straight kurti',209],['A-line kurti',229],['Anarkali kurti',399],['Flared kurti',299],['High-low kurti',279],['Side-slit kurti',229],['Front-slit kurti',249],['Angrakha kurti',349],['Shirt-style kurti',299],['Tiered kurti',349],['Cape kurti',449],['Jacket kurti',449],['Kaftan kurti',279],['Asymmetric kurti',299],['Short kurti / top',179],['Long straight kurti',249]]},
+ {id:'suit',en:'Suit styles',hi:'सूट',o:'ns',items:[['Straight suit with salwar',529],['A-line suit with pant',549],['Anarkali suit',799],['Palazzo suit',549],['Patiala suit',649],['Sharara suit',899],['Gharara suit',999],['Churidar suit',579],['Cigarette-pant suit',549],['Dhoti suit',599],['Co-ord set',499],['Pakistani suit',599]]},
+ {id:'blouse',en:'Blouse styles',hi:'ब्लाउज़',o:'nsb',items:[['Simple blouse',229],['Sleeveless blouse',229],['Boat-neck blouse',249],['Lined blouse',289],['High-neck blouse',299],['Halter blouse',299],['Katori blouse',329],['Princess-cut blouse',349],['Off-shoulder blouse',349],['Padded blouse',369],['Jacket blouse',449],['Designer blouse',699,'from']]},
+ {id:'bottoms',en:'Bottoms',hi:'सलवार / पैंट',o:'',items:[['Salwar',189],['Palazzo',189],['Churidar',199],['Straight pant',219],['Cigarette pant',219],['Tulip pant',229],['Patiala salwar',249],['Dhoti pant',249],['Sharara',349],['Gharara',399]]},
+ {id:'skirts',en:'Skirts & lehenga',hi:'स्कर्ट और लहंगा',o:'',items:[['Straight skirt',299],['Gathered skirt',329],['A-line skirt',349],['Wrap skirt',349],['Flared skirt',399],['High-low skirt',399],['Pleated skirt',449],['Tiered skirt',449],['Circle skirt',449],['Mermaid skirt',499],['Knife-pleated skirt',499],['Lehenga & bridal',null]]},
+ {id:'men',en:"Men's wear",hi:'पुरुषों के कपड़े',o:'',items:[['Shirt',329],['Trouser',349],['Kurta',279],['Pajama',169],['Kurta-pajama set',449],['Pathani suit',549],['Nehru jacket',799],['Sherwani & coat',null]]},
+ {id:'kids',en:"Kids' wear",hi:'बच्चों के कपड़े',o:'',items:[['Frock',249],["Girls' suit",349],['Lehenga-choli',499],["Boys' kurta-pajama",299],['Shirt (kids)',229],['Pant (kids)',199]]},
+ {id:'alter',en:'Alterations & add-ons',hi:'अल्टरेशन और ऐड-ऑन',o:'',items:[['Length / hem',49],['Sleeve shortening',49],['Zip change',49],['Dupatta edging',49],['Fitting (in / out)',69],['Blouse fitting',69],['Trouser waist',69],['Saree fall-pico',79],['Lace on border',40],['Lining',60],['Padding (cups)',80],['Latkans (pair)',50]]}
+];
+const rs=n=>'₹'+Number(n).toLocaleString('en-IN');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const optList=(arr)=>arr.map(([n,p],i)=>`<option value="${i}">${esc(n)}${p?' (+₹'+p+')':' (incl.)'}</option>`).join('');
+const NO=optList(NECK),SO=optList(SLEEVE),BO=optList(BACK);
+
+// state: key -> {q,n,s,b}
+let cart={};try{cart=JSON.parse(localStorage.getItem('laaraCart')||'{}')||{}}catch(e){cart={}}
+const save=()=>{try{localStorage.setItem('laaraCart',JSON.stringify(cart))}catch(e){}};
+const find=k=>{const [c,i]=k.split(':');const cat=CATS.find(x=>x.id===c);return cat&&cat.items[i]?{cat,it:cat.items[i]}:null};
+
+document.getElementById('tabs').innerHTML=CATS.map((c,i)=>`<a href="#${c.id}" class="${i?'':'on'}"><span data-l="en">${esc(c.en)}</span><span data-l="hi">${c.hi}</span></a>`).join('');
+document.getElementById('cats').innerHTML=CATS.map(c=>`
+<section class="cat" id="${c.id}">
+ <h2><span data-l="en">${esc(c.en)}</span><span data-l="hi">${c.hi}</span></h2>
+ ${c.o?`<p class="hint"><span data-l="en">Tick a style, then choose designs. Basic designs are included in the price.</span><span data-l="hi">स्टाइल पर टिक करें, फिर डिज़ाइन चुनें। सामान्य डिज़ाइन कीमत में शामिल हैं।</span></p>`:''}
+ <div class="items">${c.items.map(([n,p,from],i)=>{const k=c.id+':'+i;return `
+  <div class="item" data-k="${k}">
+   <label class="row"><input type="checkbox" data-k="${k}"><span class="nm">${esc(n)}</span>
+    <span class="pr${p==null?' q':''}">${p==null?'By quote':(from?'from ':'')+rs(p)}</span></label>
+   <div class="opts">
+    <label><span data-l="en">Quantity</span><span data-l="hi">संख्या</span><span class="qty"><button type="button" data-d="-1" data-k="${k}" aria-label="Less">−</button><span data-qk="${k}">1</span><button type="button" data-d="1" data-k="${k}" aria-label="More">+</button></span></label>
+    ${c.o.includes('n')?`<label><span data-l="en">Neck</span><span data-l="hi">गला</span><select data-f="n" data-k="${k}">${NO}</select></label>`:''}
+    ${c.o.includes('s')?`<label><span data-l="en">Sleeve</span><span data-l="hi">बाजू</span><select data-f="s" data-k="${k}">${SO}</select></label>`:''}
+    ${c.o.includes('b')?`<label><span data-l="en">Back</span><span data-l="hi">पीछे</span><select data-f="b" data-k="${k}">${BO}</select></label>`:''}
+   </div>
+  </div>`}).join('')}</div>
+</section>`).join('');
+
+function lineInfo(k){
+  const f=find(k);if(!f)return null;const s=cart[k];const [name,base,from]=f.it;
+  const parts=[];let extra=0;
+  if(f.cat.o.includes('n')){const [n,p]=NECK[s.n||0];parts.push(n);extra+=p}
+  if(f.cat.o.includes('s')){const [n,p]=SLEEVE[s.s||0];parts.push(n);extra+=p}
+  if(f.cat.o.includes('b')){const [n,p]=BACK[s.b||0];parts.push(n);extra+=p}
+  const unit=base==null?null:base+extra;
+  return {name,from,parts,q:s.q||1,unit,amt:unit==null?null:unit*(s.q||1)};
+}
+function totals(){
+  let sub=0,items=0,quote=false;const lines=[];
+  for(const k in cart){const L=lineInfo(k);if(!L){delete cart[k];continue}
+    lines.push([k,L]);items+=L.q;if(L.amt==null)quote=true;else sub+=L.amt}
+  const trial=(document.querySelector('input[name=dl]:checked')||{}).value!=='plain';
+  const measure=document.getElementById('measure').checked, express=document.getElementById('express').checked;
+  const exp=express&&sub?Math.max(49,Math.round(sub*.2)):0;
+  const pickup=sub>=500?0:29, dlv=trial?49:39, meas=measure?50:0;
+  const offer=sub>0?Math.min(100,sub):0;
+  const grand=sub+exp+meas+pickup+dlv-pickup-dlv-offer; // launch offer: free pickup & delivery + ₹100 off
+  return {sub,items,quote,lines,trial,measure,express,exp,pickup,dlv,meas,offer,grand:Math.max(0,grand)};
+}
+function render(){
+  document.querySelectorAll('.item').forEach(el=>{const k=el.dataset.k,on=!!cart[k];el.classList.toggle('on',on);
+    el.querySelector('input[type=checkbox]').checked=on;
+    if(on){el.querySelector(`[data-qk="${k}"]`).textContent=cart[k].q||1;
+      el.querySelectorAll('select').forEach(s=>s.value=cart[k][s.dataset.f]||0)}});
+  const T=totals();
+  document.getElementById('cartbar').classList.toggle('show',T.items>0);
+  document.getElementById('cbCount').textContent=T.items+(T.items===1?' item':' items');
+  document.getElementById('cbTotal').textContent=rs(T.grand)+(T.quote?' + quote':'');
+  document.getElementById('lines').innerHTML=T.lines.length?T.lines.map(([k,L])=>`
+   <div class="line"><div class="d"><b>${esc(L.name)}</b> × ${L.q}${L.parts.length?`<small>${L.parts.map(esc).join(' · ')}</small>`:''}
+    <button class="rm" data-rm="${k}" type="button">Remove</button></div>
+    <div class="amt">${L.amt==null?'By quote':(L.from?'from ':'')+rs(L.amt)}</div></div>`).join('')
+   :'<p class="empty">Your cart is empty. Tick a style to add it.</p>';
+  const row=(a,b,c='')=>`<tr class="${c}"><td>${a}</td><td>${b}</td></tr>`;
+  document.getElementById('tot').innerHTML=
+    row('Stitching',rs(T.sub))+(T.exp?row('Express (+20%)',rs(T.exp)):'')+(T.meas?row('Measurement visit',rs(T.meas)):'')+
+    row('Pickup',T.pickup?rs(T.pickup):'Free')+row(T.trial?'Delivery with trial':'Delivery',rs(T.dlv))+
+    row('Launch offer: free pickup &amp; delivery','−'+rs(T.pickup+T.dlv),'off')+(T.offer?row('Launch offer: ₹100 off','−'+rs(T.offer),'off'):'')+
+    row('Estimated total',rs(T.grand),'g');
+  document.getElementById('quoteNote').textContent=(T.quote?'Lehenga, bridal, sherwani and designer pieces are priced after we see your design. ':'')+'Launch offer applies to the first 500 orders (one per customer).';
+  save();
+}
+document.addEventListener('change',e=>{const t=e.target;
+  if(t.matches('.item input[type=checkbox]')){const k=t.dataset.k;if(t.checked)cart[k]={q:1,n:0,s:3,b:0};else delete cart[k];render()}
+  else if(t.matches('select[data-f]')){const k=t.dataset.k;if(cart[k]){cart[k][t.dataset.f]=+t.value;render()}}
+  else if(t.matches('input[name=dl],#measure,#express'))render();
+});
+document.addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;
+  if(t.dataset.d){const k=t.dataset.k;if(cart[k]){cart[k].q=Math.max(1,Math.min(20,(cart[k].q||1)+(+t.dataset.d)));render()}}
+  else if(t.dataset.rm){delete cart[t.dataset.rm];render()}
+});
+const drawer=document.getElementById('drawer');
+document.getElementById('openCart').onclick=()=>{document.getElementById('thanks').hidden=true;document.getElementById('cartView').hidden=false;drawer.classList.add('open');document.body.style.overflow='hidden'};
+const closeD=()=>{drawer.classList.remove('open');document.body.style.overflow=''};
+document.getElementById('closeCart').onclick=closeD;
+drawer.addEventListener('click',e=>{if(e.target===drawer)closeD()});
+
+const placeBtn=document.getElementById('placeBtn');
+placeBtn.onclick=async()=>{
+  const T=totals(),err=document.getElementById('err');
+  const name=document.getElementById('cName').value.trim(),phone=document.getElementById('cPhone').value.replace(/\D/g,''),
+        addr=document.getElementById('cAddr').value.trim(),slot=document.getElementById('cSlot').value,
+        date=document.getElementById('cDate').value,note=document.getElementById('cNote').value.trim();
+  if(!T.items){err.textContent='Please tick at least one item.';return}
+  if(!name||phone.length<10||!addr){err.textContent='Please fill in your name, 10-digit mobile number and address.';return}
+  err.textContent='';placeBtn.disabled=true;placeBtn.style.opacity=.6;
+  const d=new Date(),pad=n=>String(n).padStart(2,'0');
+  const id='LS-'+pad(d.getDate())+pad(d.getMonth()+1)+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
+  const itemLines=T.lines.map(([k,L],i)=>`${i+1}. ${L.name} × ${L.q} — ${L.amt==null?'By quote':(L.from?'from ':'')+rs(L.amt)}`+(L.parts.length?`\n   ${L.parts.join(', ')}`:'')).join('\n');
+  const extras=[T.exp?`Express ${rs(T.exp)}`:'',T.meas?`Measurement visit ${rs(T.meas)}`:''].filter(Boolean).join('; ')||'None';
+  const delivery=(T.trial?'Delivery with trial':'Delivery only')+'; launch offer: free pickup & delivery + ₹100 off';
+  const total=rs(T.grand)+(T.quote?' + quote items':'');
+  let m=`*New order — Laara's Studio*\nRef: ${id}\n\n${itemLines}\n\nStitching: ${rs(T.sub)}${T.quote?' + quote items':''}\n`;
+  if(T.exp)m+=`Express: ${rs(T.exp)}\n`;
+  if(T.meas)m+=`Measurement visit: ${rs(T.meas)}\n`;
+  m+=`${delivery}\n*Estimated total: ${total}*\n\nName: ${name}\nMobile: ${phone}\nAddress: ${addr}\nPickup: ${slot}\n`;
+  if(date)m+=`Need by: ${date}\n`;
+  if(note)m+=`Notes: ${note}\n`;
+  const waUrl=`https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+  // save a copy (Google Sheet + email to admin) before opening WhatsApp
+  const body=new URLSearchParams({'bot-field':'',ref:id,name,mobile:phone,address:addr,pickup_slot:slot,need_by:date,notes:note,items:itemLines,delivery,extras,estimated_total:total}).toString();
+  if(ORDER_ENDPOINT){try{const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),5000);
+    await fetch(ORDER_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body,signal:ctl.signal});clearTimeout(t)}catch(e){}}
+  cart={};save();render();
+  document.getElementById('tyRef').textContent=id;
+  document.getElementById('tyTotal').textContent='Estimated total: '+total;
+  document.getElementById('tyWa').href=waUrl;
+  document.getElementById('cartView').hidden=true;document.getElementById('thanks').hidden=false;
+  document.querySelector('.panel').scrollTop=0;
+  placeBtn.disabled=false;placeBtn.style.opacity='';
+  setTimeout(()=>{location.href=waUrl},600);
+};
+document.getElementById('tyNew').onclick=()=>{document.getElementById('thanks').hidden=true;document.getElementById('cartView').hidden=false;closeD()};
+
+// tabs highlight
+const tabs=[...document.querySelectorAll('#tabs a')];
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){tabs.forEach(a=>a.classList.toggle('on',a.hash==='#'+en.target.id))}})},{rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('.cat').forEach(s=>io.observe(s));
+
+// language
+const b=document.body,lb=document.getElementById('langBtn');
+const setL=hi=>{b.classList.toggle('hi',hi);lb.textContent=hi?'English':'हिंदी';document.documentElement.lang=hi?'hi':'en';try{localStorage.setItem('lang',hi?'hi':'en')}catch(e){}};
+let sv=null;try{sv=localStorage.getItem('lang')}catch(e){}
+setL(sv==='hi');lb.onclick=()=>setL(!b.classList.contains('hi'));
+render();
+}
+</script>
+</body>
+</html>
