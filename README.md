@@ -1,6 +1,6 @@
 # laarasclothing.in — Laara's Clothing by aRu
 
-Static website for Laara's Studio, Bhiwani. Hosted on **Cloudflare Pages**; every push to `main` goes live in about a minute.
+Static website for Laara's Studio, Bhiwani. Hosted on **Cloudflare Workers (static assets)**, connected to this repo; every push to `main` goes live in about a minute. Config: `wrangler.jsonc` (serves `site/`).
 
 ## Folders
 - `site/` — the published website (Cloudflare Pages build output directory). No build step.
