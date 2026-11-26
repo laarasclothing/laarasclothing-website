@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Styles &amp; Prices — Laara's Studio, Bhiwani</title>
-<meta name="description" content="Choose your stitching styles and place your order with Laara's Studio, Bhiwani. Free pickup on orders of ₹500+, pay on delivery.">
+<meta name="description" content="Choose your stitching styles and place your order with Laara's Studio, Bhiwani. Free trial at your door, pickup + delivery ₹59, pay only when it fits.">
 <meta name="theme-color" content="#5B2245">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,8 +115,9 @@ body.hi .shop-head p{letter-spacing:0}
 
   <div class="box2">
     <h3><span data-l="en">Delivery</span><span data-l="hi">डिलीवरी</span></h3>
-    <label class="radio"><input type="radio" name="dl" value="trial" checked> <span><span data-l="en">Delivery with trial at your door</span><span data-l="hi">डिलीवरी + घर पर ट्रायल</span> — ₹49</span></label>
-    <label class="radio"><input type="radio" name="dl" value="plain"> <span><span data-l="en">Delivery only</span><span data-l="hi">सिर्फ़ डिलीवरी</span> — ₹39</span></label>
+    <p class="note" style="margin:0 0 8px"><span data-l="en">Pickup + delivery ₹59 on every order.</span><span data-l="hi">हर ऑर्डर पर पिकअप + डिलीवरी ₹59।</span></p>
+    <label class="radio"><input type="radio" name="dl" value="trial" checked> <span><span data-l="en">Free trial at your door</span><span data-l="hi">घर पर मुफ़्त ट्रायल</span> — ₹0</span></label>
+    <label class="radio"><input type="radio" name="dl" value="plain"> <span><span data-l="en">Skip the trial (a later trial costs ₹49)</span><span data-l="hi">ट्रायल नहीं चाहिए (बाद में ट्रायल ₹49)</span></span></label>
     <label class="radio"><input type="checkbox" id="measure"> <span><span data-l="en">Measurement visit at home</span><span data-l="hi">घर पर नाप लेने आएँ</span> — ₹50</span></label>
     <label class="radio"><input type="checkbox" id="express"> <span><span data-l="en">Express stitching</span><span data-l="hi">एक्सप्रेस सिलाई</span> — +20% (min ₹49)</span></label>
   </div>
@@ -225,7 +226,7 @@ function totals(){
   const trial=(document.querySelector('input[name=dl]:checked')||{}).value!=='plain';
   const measure=document.getElementById('measure').checked, express=document.getElementById('express').checked;
   const exp=express&&sub?Math.max(49,Math.round(sub*.2)):0;
-  const pickup=sub>=500?0:29, dlv=trial?49:39, meas=measure?50:0;
+  const pickup=59, dlv=0, meas=measure?50:0; // 26 Nov 2026: flat ₹59 pickup + delivery, trial free
   const offer=sub>0?Math.min(100,sub):0;
   const grand=sub+exp+meas+pickup+dlv-pickup-dlv-offer; // launch offer: free pickup & delivery + ₹100 off
   return {sub,items,quote,lines,trial,measure,express,exp,pickup,dlv,meas,offer,grand:Math.max(0,grand)};
@@ -247,7 +248,7 @@ function render(){
   const row=(a,b,c='')=>`<tr class="${c}"><td>${a}</td><td>${b}</td></tr>`;
   document.getElementById('tot').innerHTML=
     row('Stitching',rs(T.sub))+(T.exp?row('Express (+20%)',rs(T.exp)):'')+(T.meas?row('Measurement visit',rs(T.meas)):'')+
-    row('Pickup',T.pickup?rs(T.pickup):'Free')+row(T.trial?'Delivery with trial':'Delivery',rs(T.dlv))+
+    row('Pickup + delivery',rs(T.pickup))+row(T.trial?'Trial at your door':'Trial skipped',T.trial?'Free':'—')+
     row('Launch offer: free pickup &amp; delivery','−'+rs(T.pickup+T.dlv),'off')+(T.offer?row('Launch offer: ₹100 off','−'+rs(T.offer),'off'):'')+
     row('Estimated total',rs(T.grand),'g');
   document.getElementById('quoteNote').textContent=(T.quote?'Lehenga, bridal, sherwani and designer pieces are priced after we see your design. ':'')+'Launch offer applies to the first 500 orders (one per customer).';
@@ -281,7 +282,7 @@ placeBtn.onclick=async()=>{
   const id='LS-'+pad(d.getDate())+pad(d.getMonth()+1)+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
   const itemLines=T.lines.map(([k,L],i)=>`${i+1}. ${L.name} × ${L.q} — ${L.amt==null?'By quote':(L.from?'from ':'')+rs(L.amt)}`+(L.parts.length?`\n   ${L.parts.join(', ')}`:'')).join('\n');
   const extras=[T.exp?`Express ${rs(T.exp)}`:'',T.meas?`Measurement visit ${rs(T.meas)}`:''].filter(Boolean).join('; ')||'None';
-  const delivery=(T.trial?'Delivery with trial':'Delivery only')+'; launch offer: free pickup & delivery + ₹100 off';
+  const delivery=(T.trial?'Free trial at the door':'Trial skipped')+'; pickup + delivery ₹59; launch offer: free pickup & delivery + ₹100 off';
   const total=rs(T.grand)+(T.quote?' + quote items':'');
   let m=`*New order — Laara's Studio*\nRef: ${id}\n\n${itemLines}\n\nStitching: ${rs(T.sub)}${T.quote?' + quote items':''}\n`;
   if(T.exp)m+=`Express: ${rs(T.exp)}\n`;
